@@ -124,13 +124,35 @@ function App() {
   return (
     <div id="ElevatorContainer" ref={master}>
       <h1 id="title">Elevator</h1>
-      <div id="scoreWindow">
-        <p id="scoreCount">{scoreCount}</p>
-        <div
-          id="needle"
-          style={{ transform: `rotate(${-50 + scoreCount}deg)` }}
-        />
-        <div id="puck" />
+      <p
+        id="highScore"
+        ref={highScoreRef}
+        onAnimationEnd={() => {
+          highScoreRef.current.className = '';
+        }}
+      >
+        HIGH SCORE: {highScore}
+      </p>
+      <div id="mobileWindow">
+        <div id="scoreWindowMobile">
+          <p id="scoreCount">{scoreCount}</p>
+          <div
+            id="needle"
+            style={{ transform: `rotate(${-50 + scoreCount}deg)` }}
+          />
+          <div id="puck" />
+        </div>
+        <div id="loadingBarMobile">
+          <div id="loadingColorMobile" ref={loadingColor} />
+        </div>
+        <button
+          id="upButtonMobile"
+          className="upButtonOff"
+          onClick={startGame}
+          ref={upButton}
+        >
+          UP
+        </button>
       </div>
       <div id="buttonsDiv" onClick={divClick}>
         {buttonsArr}
@@ -147,6 +169,14 @@ function App() {
           <div className="x xBottomRight">x</div>
         </div>
       </div>
+      <div id="scoreWindow">
+        <p id="scoreCount">{scoreCount}</p>
+        <div
+          id="needle"
+          style={{ transform: `rotate(${-50 + scoreCount}deg)` }}
+        />
+        <div id="puck" />
+      </div>
       <div id="loadingBar">
         <div id="loadingColor" ref={loadingColor} />
       </div>
@@ -158,15 +188,7 @@ function App() {
       >
         UP
       </button>
-      <p
-        id="highScore"
-        ref={highScoreRef}
-        onAnimationEnd={() => {
-          highScoreRef.current.className = '';
-        }}
-      >
-        HIGH SCORE: {highScore}
-      </p>
+      <h1 id="titleMobile">Elevator</h1>
     </div>
   );
 }

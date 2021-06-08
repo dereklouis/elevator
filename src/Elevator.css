@@ -22,12 +22,17 @@
   font-size: 30px;
 }
 
-#title {
-  margin: 30px 0px 30px 0px;
+#title,
+#titleMobile {
+  margin: 0.5em 0px 0.5em 0px;
   letter-spacing: 3px;
   font-size: 1.3em;
   font-family: 'Atomic Age', cursive;
   letter-spacing: 0.15em;
+}
+
+#titleMobile {
+  display: none;
 }
 
 #buttonsDiv {
@@ -169,6 +174,26 @@
   align-items: center;
 }
 
+#scoreWindowMobile {
+  position: relative;
+  width: 5em;
+  height: 4em;
+  background: linear-gradient(
+    87deg,
+    #575853,
+    #797977,
+    #969591,
+    #797977,
+    #4c4d49
+  );
+  border: 0.2em solid rgb(135, 85, 85);
+  border-radius: 50% 50% 5% 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 #needle {
   height: 3em;
   width: 0.1em;
@@ -201,9 +226,9 @@
 
 #upButton {
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
-  transform: translate(-2.75em, -1.3em);
+  transform: translate(-2.95em, 36.25em);
   border-radius: 50%;
   overflow: hidden;
   font-size: inherit;
@@ -220,7 +245,25 @@
   font-weight: bold;
 }
 
-#upButton:active {
+#upButtonMobile {
+  border-radius: 50%;
+  overflow: hidden;
+  font-size: inherit;
+  cursor: pointer;
+  outline: none;
+  width: 3.35em;
+  height: 3.35em;
+  border: 0.25em solid rgb(16, 16, 16);
+  cursor: pointer;
+  box-shadow: 0px -1px rgba(255, 255, 255, 0.1),
+    0px -2px 4px rgba(255, 255, 255, 0.3), 0px 2px 5px 1px rgba(0, 0, 0, 0.8),
+    inset 0px 2px 10px 5px rgba(0, 0, 0, 0.8),
+    inset 0px -2px 10px 3px rgba(255, 255, 255, 0.8);
+  font-weight: bold;
+}
+
+#upButton:active,
+#upButtonMobile:active {
   box-shadow: 0px -1px rgba(255, 255, 255, 0.1),
     0px -2px 4px rgba(255, 255, 255, 0.3), 0px 2px 6px 1px rgba(0, 0, 0, 0.8),
     inset 0px 2px 10px 6px rgba(0, 0, 0, 0.8),
@@ -235,24 +278,29 @@
   background: linear-gradient(0deg, #fcab7e, #fceb93);
 }
 
-/* #fceb93,
-    #fcab7e,
-    #d7471a */
-
 #loadingBar {
   width: 0.5em;
   height: 25em;
   background-color: rgba(0, 0, 0, 0.8);
   position: absolute;
   right: 0;
-  transform: translate(-4.3em, 9em);
+  transform: translate(-4.4em, 9em);
   border-radius: 15px;
   overflow: hidden;
 }
 
+#loadingBarMobile {
+  width: 0.5em;
+  height: 25em;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 15px;
+  overflow: hidden;
+  transform: rotate(90deg);
+}
+
 @keyframes loadingColor {
   0% {
-    opacity: 0.75;
+    opacity: 0.5;
   }
   100% {
     opacity: 1;
@@ -279,6 +327,14 @@
   background-color: #2d9d2f;
   position: absolute;
   right: 0;
+  transform: translate(0%, 100%);
+  border-radius: 15px;
+}
+
+#loadingColorMobile {
+  width: 0.5em;
+  height: 25em;
+  background-color: #2d9d2f;
   transform: translate(0%, 100%);
   border-radius: 15px;
 }
@@ -331,15 +387,122 @@
   letter-spacing: 0.1em;
   border-radius: 15px;
   border: 0.25em solid rgb(16, 16, 16);
-  margin: 1.2em 0em 0em 0em;
+  margin: 0em 0em 1em 0em;
   box-shadow: 0px -1px rgba(255, 255, 255, 0.1),
     0px -2px 4px rgba(255, 255, 255, 0.3), 0px 2px 5px 1px rgba(0, 0, 0, 0.8),
     inset 0px 2px 10px 5px rgba(0, 0, 0, 0.8),
     inset 0px -2px 10px 3px rgba(255, 255, 255, 0.8);
 }
 
-@media (max-width: 1050px) {
+#mobileWindow {
+  display: none;
+}
+
+@media (max-width: 1400px), (max-height: 1225px) {
   #ElevatorContainer {
     font-size: 24px;
+  }
+  .button {
+    margin: 0.65em 0.33em;
+  }
+  #buttonsDiv {
+    height: 36.66em;
+  }
+  #loadingBar,
+  #loadingColor {
+    height: 27.5em;
+  }
+  #upButton {
+    transform: translate(-2.95em, 39.87em);
+  }
+}
+
+@media (max-width: 1115px), (max-height: 1055px) {
+  #ElevatorContainer {
+    font-size: 19px;
+  }
+  .button {
+    margin: 0.95em 0.33em;
+  }
+  #buttonsDiv {
+    height: 40em;
+  }
+  #loadingBar,
+  #loadingColor {
+    height: 30.25em;
+  }
+  #upButton {
+    transform: translate(-2.95em, 43.86em);
+  }
+}
+
+@media (max-width: 875px), (max-height: 900px) {
+  #mobileWindow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 26.66em;
+    height: 5em;
+    margin: 0em 0em 1em 0em;
+  }
+  .button {
+    margin: 1.3em 0.33em;
+  }
+  #buttonsDiv {
+    height: 44em;
+  }
+  #scoreWindow,
+  #upButton,
+  #loadingBar,
+  #loadingBarColor,
+  #title {
+    display: none;
+  }
+  #titleMobile {
+    display: block;
+  }
+  #highScore {
+    margin: 1.5em 0em 0.5em 0em;
+  }
+  #loadingBarMobile,
+  #loadingBarColorMobile {
+    width: 0.5em;
+    height: 14em;
+  }
+}
+
+@media (max-width: 575px), (max-height: 900px) {
+  #ElevatorContainer {
+    font-size: 12px;
+  }
+  .button {
+    margin: 1.65em 0.33em;
+  }
+  #buttonsDiv {
+    height: 48.4em;
+  }
+}
+
+@media (max-width: 370px), (max-height: 745px) {
+  #ElevatorContainer {
+    font-size: 10px;
+  }
+  .button {
+    margin: 2em 0.33em;
+  }
+  #buttonsDiv {
+    height: 53.24em;
+  }
+}
+
+@media (max-width: 305px), (max-height: 665px) {
+  #ElevatorContainer {
+    font-size: 8px;
+  }
+  .button {
+    margin: 2.4em 0.33em;
+  }
+  #buttonsDiv {
+    height: 58.56em;
   }
 }
