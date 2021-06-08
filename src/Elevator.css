@@ -194,9 +194,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 3em;
-  height: 3em;
-  transform: translate(-1em, -1em);
+  transform: translate(-2.5em, -1.3em);
   border-radius: 50%;
   overflow: hidden;
   font-size: inherit;
@@ -205,7 +203,83 @@
 }
 
 #goButton:disabled {
+  color: #fffe07;
+  text-shadow: 0px 0px 5px #fffe07, 0px 0px 20px #fffe07;
   opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#loadingBar {
+  width: 0.5em;
+  height: 25em;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  right: 0;
+  transform: translate(-4.3em, 9em);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+@keyframes loadingColor {
+  0% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes colorUp {
+  0% {
+    transform: translate(0%, 100%);
+  }
+  100% {
+    transform: translate(0%, 0%);
+  }
+}
+
+.loadingAnimation {
+  animation: colorUp 30s linear 0s 1 normal forwards,
+    loadingColor 0.75s linear 0s 40 alternate-reverse;
+}
+
+#loadingColor {
+  width: 0.5em;
+  height: 25em;
+  background-color: #2d9d2f;
+  position: absolute;
+  right: 0;
+  transform: translate(0%, 100%);
+  border-radius: 15px;
+}
+
+@keyframes pointFlash {
+  0% {
+    opacity: 1;
+    transform: translate(2.5em, 8em);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(2.5em, 9em);
+  }
+}
+
+.pointFlashPlus,
+.pointFlashMinus {
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 2em;
+  transform: translate(2.5em, 8em);
+  animation: pointFlash 1s linear 0s 1 normal forwards;
+}
+
+.pointFlashPlus {
+  color: #2d9d2f;
+}
+
+.pointFlashMinus {
+  color: red;
 }
 
 @media (max-width: 1050px) {

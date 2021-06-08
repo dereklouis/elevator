@@ -8,6 +8,8 @@ function App() {
     }
   }, []);
   const buttons = useRef([]);
+  const master = useRef(null);
+  const loadingColor = useRef(null);
 
   const [gameState, setGameState] = useState(false);
 
@@ -26,12 +28,26 @@ function App() {
         if (scoreCount > 0) {
           setScoreCount(scoreCount - 1);
           scoreCountRef.current--;
+          const pointFlash = document.createElement('p');
+          master.current.appendChild(pointFlash);
+          pointFlash.className = 'pointFlashMinus';
+          pointFlash.innerText = '-1';
+          pointFlash.addEventListener('animationend', function () {
+            pointFlash.remove();
+          });
         }
       } else {
         buttons.current[buttonId].classList.remove('on');
         if (scoreCount < 100) {
           setScoreCount(scoreCount + 1);
           scoreCountRef.current++;
+          const pointFlash = document.createElement('p');
+          master.current.appendChild(pointFlash);
+          pointFlash.className = 'pointFlashPlus';
+          pointFlash.innerText = '+1';
+          pointFlash.addEventListener('animationend', function () {
+            pointFlash.remove();
+          });
         }
         const random = Math.floor(Math.random() * 42);
         buttons.current[random].classList.add('on');
@@ -61,6 +77,13 @@ function App() {
       if (scoreCount > 0) {
         setScoreCount(scoreCount - 1);
         scoreCountRef.current--;
+        const pointFlash = document.createElement('p');
+        master.current.appendChild(pointFlash);
+        pointFlash.className = 'pointFlashMinus';
+        pointFlash.innerText = '-1';
+        pointFlash.addEventListener('animationend', function () {
+          pointFlash.remove();
+        });
       }
     }
   };
@@ -86,9 +109,13 @@ function App() {
         setHighScore(scoreCountRef.current);
       }
     }, 30000);
+    loadingColor.current.classList.remove('loadingAnimation');
+    void loadingColor.current.offsetWidth;
+    loadingColor.current.classList.add('loadingAnimation');
   };
+
   return (
-    <div id="ElevatorContainer">
+    <div id="ElevatorContainer" ref={master}>
       <h1 id="title">ELEVATOR</h1>
       <div id="scoreWindow">
         <p id="scoreCount">{scoreCount}</p>
@@ -113,9 +140,18 @@ function App() {
           <div className="x xBottomRight">x</div>
         </div>
       </div>
-      <button id="goButton" onClick={startGame} disabled={gameState}>
-        GO!
+      <div id="loadingBar">
+        <div id="loadingColor" ref={loadingColor} />
+      </div>
+      <button
+        id="goButton"
+        className="button"
+        onClick={startGame}
+        disabled={gameState}
+      >
+        UP
       </button>
+      {/* <p className="pointFlashPlus">+1</p> */}
       <p id="highScore">HIGH SCORE: {highScore}</p>
     </div>
   );
