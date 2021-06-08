@@ -10,7 +10,9 @@ function App() {
   const buttons = useRef([]);
   const master = useRef(null);
   const loadingColor = useRef(null);
+  const loadingColorMobile = useRef(null);
   const upButton = useRef(null);
+  const upButtonMobile = useRef(null);
   const highScoreRef = useRef(null);
 
   const [gameState, setGameState] = useState(false);
@@ -102,6 +104,7 @@ function App() {
       setTimeout(() => {
         setGameState(false);
         upButton.current.className = 'upButtonOff';
+        upButtonMobile.current.className = 'upButtonOff';
         for (let i = 0; i < 42; i++) {
           buttons.current[i].classList.remove('on');
         }
@@ -115,9 +118,13 @@ function App() {
         }
       }, 30000);
       loadingColor.current.classList.remove('loadingAnimation');
+      loadingColorMobile.current.classList.remove('loadingAnimation');
       void loadingColor.current.offsetWidth;
+      void loadingColorMobile.current.offsetWidth;
       loadingColor.current.classList.add('loadingAnimation');
+      loadingColorMobile.current.classList.add('loadingAnimation');
       upButton.current.className = 'upButtonOn';
+      upButtonMobile.current.className = 'upButtonOn';
     }
   };
 
@@ -143,13 +150,13 @@ function App() {
           <div id="puck" />
         </div>
         <div id="loadingBarMobile">
-          <div id="loadingColorMobile" ref={loadingColor} />
+          <div id="loadingColorMobile" ref={loadingColorMobile} />
         </div>
         <button
           id="upButtonMobile"
           className="upButtonOff"
           onClick={startGame}
-          ref={upButton}
+          ref={upButtonMobile}
         >
           UP
         </button>
