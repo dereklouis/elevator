@@ -23,9 +23,11 @@
 }
 
 #title {
-  margin: 50px 0px 75px 0px;
+  margin: 30px 0px 30px 0px;
   letter-spacing: 3px;
-  font-size: 1em;
+  font-size: 1.3em;
+  font-family: 'Atomic Age', cursive;
+  letter-spacing: 0.15em;
 }
 
 #buttonsDiv {
@@ -149,7 +151,14 @@
   width: 5em;
   height: 4em;
   transform: translate(-2em, 2em);
-  background-color: gray;
+  background: linear-gradient(
+    87deg,
+    #575853,
+    #797977,
+    #969591,
+    #797977,
+    #4c4d49
+  );
   border: 0.2em solid rgb(135, 85, 85);
   top: 0;
   right: 0;
@@ -190,24 +199,45 @@
   background-color: black;
 }
 
-#goButton {
+#upButton {
   position: absolute;
   bottom: 0;
   right: 0;
-  transform: translate(-2.5em, -1.3em);
+  transform: translate(-2.75em, -1.3em);
   border-radius: 50%;
   overflow: hidden;
   font-size: inherit;
   cursor: pointer;
   outline: none;
+  width: 3.35em;
+  height: 3.35em;
+  border: 0.25em solid rgb(16, 16, 16);
+  cursor: pointer;
+  box-shadow: 0px -1px rgba(255, 255, 255, 0.1),
+    0px -2px 4px rgba(255, 255, 255, 0.3), 0px 2px 5px 1px rgba(0, 0, 0, 0.8),
+    inset 0px 2px 10px 5px rgba(0, 0, 0, 0.8),
+    inset 0px -2px 10px 3px rgba(255, 255, 255, 0.8);
+  font-weight: bold;
 }
 
-#goButton:disabled {
-  color: #fffe07;
-  text-shadow: 0px 0px 5px #fffe07, 0px 0px 20px #fffe07;
-  opacity: 0.5;
-  cursor: not-allowed;
+#upButton:active {
+  box-shadow: 0px -1px rgba(255, 255, 255, 0.1),
+    0px -2px 4px rgba(255, 255, 255, 0.3), 0px 2px 6px 1px rgba(0, 0, 0, 0.8),
+    inset 0px 2px 10px 6px rgba(0, 0, 0, 0.8),
+    inset 0px -2px 10px 3px rgba(255, 255, 255, 0.8);
 }
+
+.upButtonOff {
+  background: linear-gradient(90deg, #e5e8ec, #e4e5e7, #e9eaec);
+}
+
+.upButtonOn {
+  background: linear-gradient(0deg, #fcab7e, #fceb93);
+}
+
+/* #fceb93,
+    #fcab7e,
+    #d7471a */
 
 #loadingBar {
   width: 0.5em;
@@ -280,6 +310,32 @@
 
 .pointFlashMinus {
   color: red;
+}
+
+@keyframes highscoreBlink {
+  50% {
+    background: linear-gradient(0deg, #fcab7e, #fceb93);
+  }
+}
+
+.highScoreAnimation {
+  animation: highscoreBlink 2s step-start 0s 3;
+}
+
+#highScore {
+  font-size: 0.9em;
+  color: black;
+  font-weight: bold;
+  background: linear-gradient(90deg, #e5e8ec, #e4e5e7, #e9eaec);
+  padding: 0.5em 3em;
+  letter-spacing: 0.1em;
+  border-radius: 15px;
+  border: 0.25em solid rgb(16, 16, 16);
+  margin: 1.2em 0em 0em 0em;
+  box-shadow: 0px -1px rgba(255, 255, 255, 0.1),
+    0px -2px 4px rgba(255, 255, 255, 0.3), 0px 2px 5px 1px rgba(0, 0, 0, 0.8),
+    inset 0px 2px 10px 5px rgba(0, 0, 0, 0.8),
+    inset 0px -2px 10px 3px rgba(255, 255, 255, 0.8);
 }
 
 @media (max-width: 1050px) {

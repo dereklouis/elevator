@@ -10,6 +10,8 @@ function App() {
   const buttons = useRef([]);
   const master = useRef(null);
   const loadingColor = useRef(null);
+  const upButton = useRef(null);
+  const highScoreRef = useRef(null);
 
   const [gameState, setGameState] = useState(false);
 
@@ -88,35 +90,40 @@ function App() {
     }
   };
   const startGame = () => {
-    for (let i = 0; i < 42; i++) {
-      buttons.current[i].classList.remove('on');
-    }
-    setGameState(true);
-    setScoreCount(0);
-    scoreCountRef.current = 0;
-    const random = Math.floor(Math.random() * 42);
-    buttons.current[random].classList.add('on');
-    setTimeout(() => {
-      setGameState(false);
+    if (!gameState) {
       for (let i = 0; i < 42; i++) {
         buttons.current[i].classList.remove('on');
       }
-      if (
-        scoreCountRef.current >
-        Number(localStorage.getItem('elevatorHighScore'))
-      ) {
-        localStorage.setItem('elevatorHighScore', scoreCountRef.current);
-        setHighScore(scoreCountRef.current);
-      }
-    }, 30000);
-    loadingColor.current.classList.remove('loadingAnimation');
-    void loadingColor.current.offsetWidth;
-    loadingColor.current.classList.add('loadingAnimation');
+      setGameState(true);
+      setScoreCount(0);
+      scoreCountRef.current = 0;
+      const random = Math.floor(Math.random() * 42);
+      buttons.current[random].classList.add('on');
+      setTimeout(() => {
+        setGameState(false);
+        upButton.current.className = 'upButtonOff';
+        for (let i = 0; i < 42; i++) {
+          buttons.current[i].classList.remove('on');
+        }
+        if (
+          scoreCountRef.current >
+          Number(localStorage.getItem('elevatorHighScore'))
+        ) {
+          localStorage.setItem('elevatorHighScore', scoreCountRef.current);
+          setHighScore(scoreCountRef.current);
+          highScoreRef.current.className = 'highScoreAnimation';
+        }
+      }, 30000);
+      loadingColor.current.classList.remove('loadingAnimation');
+      void loadingColor.current.offsetWidth;
+      loadingColor.current.classList.add('loadingAnimation');
+      upButton.current.className = 'upButtonOn';
+    }
   };
 
   return (
     <div id="ElevatorContainer" ref={master}>
-      <h1 id="title">ELEVATOR</h1>
+      <h1 id="title">Elevator</h1>
       <div id="scoreWindow">
         <p id="scoreCount">{scoreCount}</p>
         <div
@@ -144,15 +151,22 @@ function App() {
         <div id="loadingColor" ref={loadingColor} />
       </div>
       <button
-        id="goButton"
-        className="button"
+        id="upButton"
+        className="upButtonOff"
         onClick={startGame}
-        disabled={gameState}
+        ref={upButton}
       >
         UP
       </button>
-      {/* <p className="pointFlashPlus">+1</p> */}
-      <p id="highScore">HIGH SCORE: {highScore}</p>
+      <p
+        id="highScore"
+        ref={highScoreRef}
+        onAnimationEnd={() => {
+          highScoreRef.current.className = '';
+        }}
+      >
+        HIGH SCORE: {highScore}
+      </p>
     </div>
   );
 }
