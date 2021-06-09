@@ -376,7 +376,7 @@
   right: 0;
   font-size: 2em;
   transform: translate(-2em, 2em);
-  animation: pointFlash 4s linear 0s 1 normal forwards;
+  animation: pointFlash 1s linear 0s 1 normal forwards;
 }
 
 .pointFlashPlus {
@@ -394,7 +394,7 @@
 }
 
 .highScoreAnimation {
-  animation: highscoreBlink 2s step-start 0s 3;
+  animation: highscoreBlink 2s step-start 0s 5;
 }
 
 #highScore {
