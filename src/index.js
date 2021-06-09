@@ -4,6 +4,15 @@ import './index.css';
 import Elevator from './Elevator';
 import reportWebVitals from './reportWebVitals';
 
+if (window.location.host === 'elevator-game.herokuapp.com') {
+  if (
+    window.location.protocol === 'http' ||
+    window.location.protocol === 'http:'
+  ) {
+    window.location.protocol = 'https';
+  }
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Elevator />
