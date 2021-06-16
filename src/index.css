@@ -8,6 +8,14 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+.desktop {
+  height: 100vh;
+}
+
+.mobile {
+  height: -webkit-fill-available;
+}
+
 /* font-family: 'Atomic Age', cursive;
 font-family: 'Orbitron', sans-serif;
 font-family: 'Roboto', sans-serif; */

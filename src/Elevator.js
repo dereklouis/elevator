@@ -1,6 +1,16 @@
 import './Elevator.css';
 import { useRef, useState, useEffect } from 'react';
 
+let isMobile = false;
+
+if (
+  /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  )
+) {
+  isMobile = true;
+}
+
 function App() {
   useEffect(() => {
     if (localStorage.getItem('elevatorHighScore') === null) {
@@ -129,7 +139,11 @@ function App() {
   };
 
   return (
-    <div id="ElevatorContainer" ref={master}>
+    <div
+      id="ElevatorContainer"
+      className={isMobile ? 'mobile' : 'desktop'}
+      ref={master}
+    >
       <h1 id="title">Elevator</h1>
       <p
         id="highScore"
